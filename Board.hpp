@@ -26,4 +26,3 @@ namespace ariel {
         void show();
     };
 }
-
