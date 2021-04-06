@@ -4,16 +4,12 @@
 #include <map>
 namespace ariel {
     class Board {
-        std::map<int,std::map<int,char>> board ;
+        std::map<int,std::map<int,char>>* board ;
     public:
-        Board(){
-            board = new std::map<int,std::map<int,char>>() ;
-        }
-        ~Board() { 
-            delete board ;
-        }
-        void post(uint row, uint column, Direction direction, std::string message);
-        std::string read(uint row, uint column, Direction direction, int length);
+        Board();
+        ~Board();
+        void post(uint32_t row, uint32_t column, Direction direction, std::string message);
+        std::string read(uint32_t row, uint32_t column, Direction direction, uint32_t length);
         void show();
     };
 }
