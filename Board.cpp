@@ -1,29 +1,37 @@
-#include <iostream>
 #include "Board.hpp"
-#include <map>
-#include <string>
-#include <stdexcept>
+
 using namespace std;
 using namespace ariel;
+
 namespace ariel {
     const Direction horizontal = Direction::Horizontal;
-    const Direction vertical = Direction::Vertical; 
+    const Direction vertical = Direction::Vertical;
+
     Board::Board(){
         board = new std::map<int,std::map<int,char>>() ;
+        maxRw=0;
+        maxCn=0;
     }
-    Board::Board(Board::Board other){
-        
-    }
+
     Board::~Board() { 
         delete board ;
     }
+
+    int Board::getRw() const{
+        return maxRw;
+    }
+
+    int Board::getCn() const{
+        return maxCn;
+    }
+
     void Board::post(uint32_t row, uint32_t column, Direction direction, string message) {
         if(direction == horizontal){
-            if(((int)row)+message.length()>(*maxRw)){
-                (*maxRw)=((int)row)+message.length();
+            if(((int)row)+((int)message.length())>(maxRw)){
+                (maxRw)=((int)row)+((int)message.length());
             }
-            if(((int)column)>(*maxCn)){
-                (*maxCn)=((int)column);
+            if(((int)column)>(maxCn)){
+                (maxCn)=((int)column);
             }
             if((*board).find((int)row)==(*board).end()){
                 map<int,char>rowN;
@@ -38,6 +46,12 @@ namespace ariel {
             return;
         }
         if(direction == vertical){
+            if(((int)row)>(maxRw)){
+                (maxRw)=((int)row);
+            }
+            if(((int)column)+((int)message.length())>(maxCn)){
+                (maxCn)=((int)column)+((int)message.length());
+            }
             for(size_t i=0;i<message.length();i++){
                 if((*board).find((int)row+((int)i))==(*board).end()){
                     map<int,char>rowN;
@@ -52,6 +66,7 @@ namespace ariel {
         }
         throw invalid_argument{"Invalid direction ."};
     }
+
     char Board::charAt(int row, int column){
         if((*board).find(row)!=(*board).end()){
             if((*board).at(row).find(column)!=(*board).at(row).end()){
@@ -59,7 +74,8 @@ namespace ariel {
             }
         }
         return '_';
-    }     
+    }   
+
     string Board::read(uint32_t row, uint32_t column, Direction direction, uint32_t length) {
         string str ;
         if(direction==horizontal){
@@ -78,6 +94,11 @@ namespace ariel {
     }
 
     void Board::show() {
-
+        for(int i=0;i<maxRw;i++){
+            for(int j=0;j<maxCn;j++){
+                cout<<Board::charAt(i,j);
+            }
+            cout<<"\n";
+        }
     }
 }
