@@ -6,7 +6,7 @@ using namespace ariel;
 namespace ariel {
     const Direction horizontal = Direction::Horizontal;
     const Direction vertical = Direction::Vertical;
-
+    
     Board::Board(){
         board = new std::map<int,std::map<int,char>>() ;
         maxRw=0;
@@ -94,11 +94,11 @@ namespace ariel {
     }
 
     void Board::show() {
-        for(int i=0;i<maxRw;i++){
-            for(int j=0;j<maxCn;j++){
-                cout<<Board::charAt(i,j);
+        for (const auto &row : *board){
+            for (const auto &column : row.second){
+                    cout << column.second;
             }
-            cout<<"\n";
+            cout << endl;
         }
     }
 }
