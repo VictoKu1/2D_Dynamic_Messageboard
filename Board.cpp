@@ -1,4 +1,3 @@
-//*Implementation of the board class.
 #include "Board.hpp"
 using namespace std;
 using namespace ariel;

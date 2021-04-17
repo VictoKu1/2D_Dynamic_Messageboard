@@ -1,9 +1,6 @@
 #include "Board.hpp"
 using namespace ariel;
 using namespace std;
-#include "Direction.hpp"
-#include <fstream>
-#include <cstdlib>
 const Direction horizontal = Direction::Horizontal;
 Board board = Board();
 void extend(int row, int column, int inputLength)
